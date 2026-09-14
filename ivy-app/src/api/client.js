@@ -182,7 +182,7 @@ export const fetchAnalyticsSummary = () => request("/v1/analytics/summary");
 // ---- Favourites ---------------------------------------------------------
 
 export const fetchFavourites = () => request("/v1/favorites");
-export const addFavourite = (id) => request("/v1/favorites", { method: "POST", body: { id } });
+export const addFavourite = (id) => request("/v1/favorites", { method: "POST", body: {listing_id: id } });
 export const removeFavourite = (id) => request(`/v1/favorites/${id}`, { method: "DELETE" });
 
 // ---- Field normalization helpers ----------------------------------------
