@@ -49,8 +49,16 @@ def run_analysis():
         if corrupt:
             corrupt_listing_ids.append(x.get("listing_id"))
 
-    # Calculate Q5 (Total Monthly Rent for assigned locality)
-    total_monthly_rent = sum(r.get("price", 0) for r in rentals if r.get("locality", "").lower() == "bandra east")
+   # Calculate Q5 (Total Monthly Rent for assigned locality)
+    unique_rentals = {}
+    for r in rentals:
+        if r.get("locality", "").lower() == "bandra east":
+            # Fingerprint to identify unique physical properties
+            fingerprint = (r.get("latitude"), r.get("longitude"), r.get("apartment_name"))
+            if fingerprint not in unique_rentals:
+                unique_rentals[fingerprint] = r
+                
+    total_monthly_rent = sum(r.get("price", 0) for r in unique_rentals.values())
 
     # Calculate Q6 (Avg price per sqft for active 2BHKs, excluding corrupt/fake)
     sqft_prices = []

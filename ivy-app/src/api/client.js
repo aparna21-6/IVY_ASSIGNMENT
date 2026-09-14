@@ -181,9 +181,9 @@ export const fetchAnalyticsSummary = () => request("/v1/analytics/summary");
 
 // ---- Favourites ---------------------------------------------------------
 
-export const fetchFavourites = () => request("/v1/favourites");
-export const addFavourite = (id) => request("/v1/favourites", { method: "POST", body: { id } });
-export const removeFavourite = (id) => request(`/v1/favourites/${id}`, { method: "DELETE" });
+export const fetchFavourites = () => request("/v1/favorites");
+export const addFavourite = (id) => request("/v1/favorites", { method: "POST", body: { id } });
+export const removeFavourite = (id) => request(`/v1/favorites/${id}`, { method: "DELETE" });
 
 // ---- Field normalization helpers ----------------------------------------
 // The doc's own object samples disagree with each other on field names
