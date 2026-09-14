@@ -53,5 +53,17 @@
         "P50016"
       ]
     }
+    ,{
+      "endpoint": "/v1/favourites",
+      "category": "missing_endpoint",
+      "documented": "Endpoints GET, POST, and DELETE /v1/favourites are documented for saving listings.",
+      "actual": "The server returns a 404 Not Found for all requests to /v1/favourites, indicating the endpoint is completely missing/unimplemented on the backend.",
+      "how_found": "Attempted to use the save feature in the UI and observed 404 Vercel edge errors in the network tab.",
+      "impact": "Users are completely unable to save, view, or remove favourite listings because the server rejects the documented routes.",
+      "evidence": [
+        "Status: 404 NOT_FOUND",
+        "Error ID: bom1::nrb69-1789394550553-d4d1c8bb3552"
+      ]
+    }
   ]
 }
