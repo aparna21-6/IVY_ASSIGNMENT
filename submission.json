@@ -1,9 +1,9 @@
 {
-  "api_key": "IVY26-XXXXXXXXXXXX",
+  "api_key": "IVY26-3339417C5039",
   "candidate": {
     "name": "Aparna Srivastava",
     "email": "aparna.20231132@mnnit.ac.in",
-    "repo_url": "https://github.com/aparna21-6/ivy_homes_assignment",
+    "repo_url": "https://github.com/aparna21-6/IVY_ASSIGNMENT",
     "demo_url": "YOUR VERCEL LINK HERE"
   },
   "answers": {
@@ -11,7 +11,7 @@
     "unique_properties": 50,
     "active_listings": 4365,
     "corrupt_listing_ids": [],
-    "total_monthly_rent": 5280000,
+    "total_monthly_rent": 132000,
     "avg_price_per_sqft_2bhk": 32642.72,
     "costliest_project": {
       "project_id": "P50016",
@@ -49,7 +49,9 @@
       "actual": "The price_min and price_max fields return decimals representing Crores (e.g., 12.44), not integer Rupees",
       "how_found": "Calculated the costliest project and observed a decimal value that is physically impossible for integer Rupees",
       "impact": "Frontend applications will display apartments as costing $0.15 instead of millions if the unit is assumed to be raw rupees",
-      "evidence": ["P50016"]
+      "evidence": [
+        "P50016"
+      ]
     }
   ]
 }
