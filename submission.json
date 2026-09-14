@@ -1,0 +1,55 @@
+{
+  "api_key": "IVY26-XXXXXXXXXXXX",
+  "candidate": {
+    "name": "Aparna Srivastava",
+    "email": "aparna.20231132@mnnit.ac.in",
+    "repo_url": "https://github.com/aparna21-6/ivy_homes_assignment",
+    "demo_url": "YOUR VERCEL LINK HERE"
+  },
+  "answers": {
+    "total_listing_records": 4850,
+    "unique_properties": 50,
+    "active_listings": 4365,
+    "corrupt_listing_ids": [],
+    "total_monthly_rent": 5280000,
+    "avg_price_per_sqft_2bhk": 32642.72,
+    "costliest_project": {
+      "project_id": "P50016",
+      "price_max_inr": 12.44
+    },
+    "listings_last_7_days": 291,
+    "fake_listing_ids": [
+      "DWE-5004326"
+    ],
+    "projects_with_wrong_listing_count": 564
+  },
+  "findings": [
+    {
+      "endpoint": "*",
+      "category": "auth",
+      "documented": "Every request must carry the API key appended as a query parameter",
+      "actual": "The API requires the key to be sent in the X-API-Key request header, and rejects query parameters with a 401 status",
+      "how_found": "Made a request to /v1/listings using the documented query parameter and read the 401 error detail",
+      "impact": "All requests fail until authentication is moved to headers",
+      "evidence": []
+    },
+    {
+      "endpoint": "/v1/listings",
+      "category": "duplicates",
+      "documented": "Every listing_id is globally unique, and each listing corresponds to exactly one physical property",
+      "actual": "The endpoint returns massive numbers of duplicate properties masquerading under different listing_ids (only 50 unique properties found out of 4850 records)",
+      "how_found": "Calculated unique properties by checking latitude, longitude, and apartment details across the full dataset",
+      "impact": "Frontend applications will display identical listings to users repeatedly if not deduplicated locally",
+      "evidence": []
+    },
+    {
+      "endpoint": "/v1/projects",
+      "category": "units",
+      "documented": "Money conventions dictate Indian rupees, integer, everywhere in the API",
+      "actual": "The price_min and price_max fields return decimals representing Crores (e.g., 12.44), not integer Rupees",
+      "how_found": "Calculated the costliest project and observed a decimal value that is physically impossible for integer Rupees",
+      "impact": "Frontend applications will display apartments as costing $0.15 instead of millions if the unit is assumed to be raw rupees",
+      "evidence": ["P50016"]
+    }
+  ]
+}
